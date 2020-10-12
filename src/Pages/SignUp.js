@@ -12,7 +12,8 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { Link as ReachRouterLink } from "@reach/router";
+import { Link as ReachRouterLink, navigate } from "@reach/router";
+import { Auth } from 'aws-amplify';
 
 function Copyright() {
   return (
@@ -47,8 +48,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignUp() {
+export default function SignUp({setUsername}) {
   const classes = useStyles();
+  
 
   return (
     <Container component="main" maxWidth="xs">
@@ -60,7 +62,33 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={(e) => {
+              e.preventDefault();
+              console.log(e.target.elements.email)
+              console.log(e.target.elements)
+             
+              const username = e.target.elements.username.value
+              const password = e.target.elements.password.value
+              const email = e.target.elements.email.value;
+              (async function () {
+                try {
+                    const { user } = await Auth.signUp({
+                        username,
+                        password,
+                        attributes: {
+                            email,          // optional
+                        }
+                    });
+                    console.log(user);
+                    setUsername(username)
+                    navigate("/confirm")
+                } catch (error) {
+                    console.log('error signing up:', error);
+                }
+            })();
+      
+
+            }}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
@@ -104,23 +132,20 @@ export default function SignUp() {
               />
             </Grid>
           </Grid>
-          <ReachRouterLink to="/confirm">
             <Button
               type="submit"
               fullWidth
               variant="contained"
               color="primary"
               className={classes.submit}
+
             >
               Sign Up
             </Button>
-          </ReachRouterLink>
           <Grid container justify="flex-end">
             <Grid item>
               <ReachRouterLink to="/">
-                <Link href="#" variant="body2">
                   Already have an account? Sign in
-                </Link>
               </ReachRouterLink>
             </Grid>
           </Grid>
@@ -132,3 +157,27 @@ export default function SignUp() {
     </Container>
   );
 }
+
+
+
+{/* <form
+            className={classes.form}
+            noValidate
+            onSubmit={(e) => {
+              e.preventDefault();
+
+              axios
+                .post("http://localhost:4000/login", {
+                  username: e.target.elements.username.value,
+                  password: e.target.elements.password.value,
+                })
+                .then((resp) => {
+                  if (resp.data.message === "successfully authenticated") {
+                    window.localStorage.setItem("jwt", resp.data.jwt);
+                    setSignedIn(resp.data.jwt);
+                    navigate("/myplaylists");
+                  }
+                })
+                .catch((err) => console.log(err));
+            }}
+          ></form> */}

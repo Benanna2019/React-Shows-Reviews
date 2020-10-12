@@ -1,0 +1,7 @@
+{
+    "showreview": {
+        "configLevel": "project",
+        "useProfile": true,
+        "profileName": "showsUser"
+    }
+}

@@ -1,0 +1,20 @@
+{
+  "showreview": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-reactshowsreviews-showreview-140003-authRole",
+      "UnauthRoleArn": "arn:aws:iam::255253513014:role/amplify-reactshowsreviews-showreview-140003-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::255253513014:role/amplify-reactshowsreviews-showreview-140003-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-reactshowsreviews-showreview-140003-deployment",
+      "UnauthRoleName": "amplify-reactshowsreviews-showreview-140003-unauthRole",
+      "StackName": "amplify-reactshowsreviews-showreview-140003",
+      "StackId": "arn:aws:cloudformation:us-east-1:255253513014:stack/amplify-reactshowsreviews-showreview-140003/41633580-0a59-11eb-940f-0a63dd50faa5",
+      "AmplifyAppId": "d2quy06t6g6thf"
+    },
+    "categories": {
+      "auth": {
+        "reactshowsreviews0fd24735": {}
+      }
+    }
+  }
+}
