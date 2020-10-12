@@ -13,6 +13,8 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link as ReachRouterLink } from "@reach/router";
+import { Auth } from "aws-amplify";
+import { navigate } from "@reach/router";
 
 function Copyright() {
   return (
@@ -60,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignInSide() {
+export default function SignInSide({ setSignedIn }) {
   const classes = useStyles();
 
   return (
@@ -75,7 +77,26 @@ export default function SignInSide() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <form className={classes.form} noValidate>
+          <form
+            className={classes.form}
+            noValidate
+            onSubmit={(e) => {
+              e.preventDefault();
+              const username = e.target.elements.username.value;
+              const password = e.target.elements.password.value;
+              (async function () {
+                try {
+                  const user = await Auth.signIn(username, password);
+                  console.log(user);
+
+                  setSignedIn(await Auth.currentAuthenticatedUser());
+                  navigate("/home");
+                } catch (error) {
+                  console.log("error sigining in", error);
+                }
+              })();
+            }}
+          >
             <TextField
               variant="outlined"
               margin="normal"
@@ -87,7 +108,7 @@ export default function SignInSide() {
               autoComplete="username"
               autoFocus
             />
-            <TextField
+            {/* <TextField
               variant="outlined"
               margin="normal"
               required
@@ -97,7 +118,7 @@ export default function SignInSide() {
               name="email"
               autoComplete="email"
               autoFocus
-            />
+            /> */}
             <TextField
               variant="outlined"
               margin="normal"

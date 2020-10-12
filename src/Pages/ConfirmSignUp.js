@@ -12,8 +12,8 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { Auth } from 'aws-amplify';
-
+import { Auth } from "aws-amplify";
+import { navigate } from "@reach/router";
 
 function Copyright() {
   return (
@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ConfirmSignUp({username}) {
+export default function ConfirmSignUp({ username }) {
   const classes = useStyles();
 
   return (
@@ -61,21 +61,24 @@ export default function ConfirmSignUp({username}) {
         <Typography component="h1" variant="h5">
           Confirm Sign Up
         </Typography>
-        <form className={classes.form} noValidate onSubmit={(e) => {
-              e.preventDefault();
-              const code = e.target.elements.code.value;
-              (async function () {
-                try {
-                  const resp = await Auth.confirmSignUp(username, code);
-                  console.log("SUCCESSFULLY AUTHENTICATED")
-                  console.log(resp)
-                } catch (error) {
-                    console.log('error confirming sign up', error);
+        <form
+          className={classes.form}
+          noValidate
+          onSubmit={(e) => {
+            e.preventDefault();
+            const code = e.target.elements.code.value;
+            (async function () {
+              try {
+                const resp = await Auth.confirmSignUp(username, code);
+                if (resp === "SUCCESS") {
+                  navigate("/");
                 }
+              } catch (error) {
+                console.log("error confirming sign up", error);
+              }
             })();
-      
-
-            }}>
+          }}
+        >
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
