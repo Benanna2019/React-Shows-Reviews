@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignUp({ setUsername }) {
+export default function SignUp({ setUsername, setPassword }) {
   const classes = useStyles();
 
   return (
@@ -83,6 +83,7 @@ export default function SignUp({ setUsername }) {
                 });
                 console.log(user);
                 setUsername(username);
+                setPassword(password);
                 navigate("/confirm");
               } catch (error) {
                 console.log("error signing up:", error);

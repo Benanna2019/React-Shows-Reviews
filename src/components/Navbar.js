@@ -1,7 +1,7 @@
 import React from "react";
 import Popcorn from "../assets/icons8-popcorn-96.png";
 import { Auth } from "aws-amplify";
-import { navigate } from "@reach/router";
+import { navigate, Link } from "@reach/router";
 
 export default function Navbar({ setSignedIn }) {
   return (
@@ -10,7 +10,9 @@ export default function Navbar({ setSignedIn }) {
         <img src={Popcorn} alt="popcorn" />
       </div>
       <div>
-        <button>profile</button>
+        <Link to="/profile">
+          <button>profile</button>
+        </Link>
       </div>
       <div>
         <button>reviews</button>
