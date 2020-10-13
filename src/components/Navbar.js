@@ -7,7 +7,9 @@ export default function Navbar({ setSignedIn }) {
   return (
     <div style={style.nav}>
       <div>
-        <img src={Popcorn} alt="popcorn" />
+        <Link to="/home">
+          <img src={Popcorn} alt="popcorn" />
+        </Link>
       </div>
       <div>
         <Link to="/profile">
