@@ -22,7 +22,7 @@ function App() {
       {signedIn ? (
         <>
           <Navbar setSignedIn={setSignedIn} />
-          <PrivateRoutes setSignedIn={setSignedIn} />
+          <PrivateRoutes setSignedIn={setSignedIn} signedIn={signedIn} />
         </>
       ) : (
         <PublicRoutes setSignedIn={setSignedIn} />
