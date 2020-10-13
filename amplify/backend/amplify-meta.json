@@ -22,7 +22,7 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-reactshowsreviews-showreview-140003-deployment/amplify-cfn-templates/auth/reactshowsreviews0fd24735-cloudformation-template.yml",
         "logicalId": "authreactshowsreviews0fd24735"
       },
-      "lastPushTimeStamp": "2020-10-09T18:06:27.269Z",
+      "lastPushTimeStamp": "2020-10-13T13:57:18.342Z",
       "output": {
         "AppClientSecret": "qk56usuda1i3gj8o21bfpd7msk80v3gtpeucv1tvj4vpcpqkdrl",
         "UserPoolId": "us-east-1_sG2R1O5Na",
@@ -33,6 +33,22 @@
         "UserPoolName": "reactshowsreviews0fd24735_userpool_0fd24735"
       },
       "lastPushDirHash": "MuvChDgZ4L5eZSHbbrNXsxTavoM="
+    }
+  },
+  "storage": {
+    "profileCont": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-reactshowsreviews-showreview-140003-deployment/amplify-cfn-templates/storage/s3-cloudformation-template.json",
+        "logicalId": "storageprofileCont"
+      },
+      "lastPushTimeStamp": "2020-10-13T13:57:18.357Z",
+      "output": {
+        "BucketName": "profilebucket140003-showreview",
+        "Region": "us-east-1"
+      },
+      "lastPushDirHash": "Akt9ij3WjaeE+PBuLET6xM6mxVI="
     }
   }
 }

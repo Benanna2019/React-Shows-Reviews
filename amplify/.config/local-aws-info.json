@@ -2,6 +2,6 @@
     "showreview": {
         "configLevel": "project",
         "useProfile": true,
-        "profileName": "showsUser"
+        "profileName": "default"
     }
 }
