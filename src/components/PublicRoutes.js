@@ -6,11 +6,21 @@ import { Router } from "@reach/router";
 
 export default function PublicRoutes({ setSignedIn }) {
   const [username, setUsername] = React.useState(undefined);
+  const [password, setPassword] = React.useState(undefined);
   return (
     <Router>
       <SignIn setSignedIn={setSignedIn} path="/" />
-      <SignUp setUsername={setUsername} path="/signup" />
-      <ConfirmSignUp username={username} path="/confirm" />
+      <SignUp
+        setUsername={setUsername}
+        setPassword={setPassword}
+        path="/signup"
+      />
+      <ConfirmSignUp
+        username={username}
+        password={password}
+        setSignedIn={setSignedIn}
+        path="/confirm"
+      />
     </Router>
   );
 }

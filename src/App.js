@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PublicRoutes from "./components/PublicRoutes";
 import PrivateRoutes from "./components/PrivateRoutes";
+import Navbar from "./components/Navbar";
 import { Auth } from "aws-amplify";
 
 function App() {
@@ -19,7 +20,10 @@ function App() {
     <div>
       {signedIn ? console.log(signedIn.signInUserSession.idToken.jwtToken) : ""}
       {signedIn ? (
-        <PrivateRoutes setSignedIn={setSignedIn} />
+        <>
+          <Navbar setSignedIn={setSignedIn} />
+          <PrivateRoutes setSignedIn={setSignedIn} />
+        </>
       ) : (
         <PublicRoutes setSignedIn={setSignedIn} />
       )}

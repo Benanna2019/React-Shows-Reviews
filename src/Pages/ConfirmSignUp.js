@@ -14,6 +14,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { Auth } from "aws-amplify";
 import { navigate } from "@reach/router";
+import axios from "axios";
 
 function Copyright() {
   return (
@@ -48,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ConfirmSignUp({ username }) {
+export default function ConfirmSignUp({ username, password, setSignedIn }) {
   const classes = useStyles();
 
   return (
@@ -71,7 +72,24 @@ export default function ConfirmSignUp({ username }) {
               try {
                 const resp = await Auth.confirmSignUp(username, code);
                 if (resp === "SUCCESS") {
-                  navigate("/");
+                  const currentUser = await Auth.signIn(username, password);
+                  console.log(currentUser);
+                  const idToken =
+                    currentUser.signInUserSession.idToken.jwtToken;
+                  console.log(idToken);
+                  // const  await Auth.currentAuthenticatedUser());
+                  axios
+                    .post("http://localhost:4000/create-user", {
+                      token: idToken,
+                      profilePic: "",
+                      aboutMe: "",
+                      age: "",
+                    })
+                    .then(() => {
+                      setSignedIn(currentUser);
+                      navigate("/home");
+                    })
+                    .catch((error) => console.log(error));
                 }
               } catch (error) {
                 console.log("error confirming sign up", error);
