@@ -3,6 +3,8 @@ import { Router } from "@reach/router";
 import Home from "../Pages/Home";
 import ProfilePage from "../Pages/ProfilePage";
 import ShowReviews from "../Pages/ShowReviews";
+import AllReviews from "../Pages/AllReviews";
+import MyReviews from "../Pages/MyReviews";
 
 export default function PrivateRoutes({ setSignedIn, signedIn }) {
   const [showReviews, setShowReviews] = React.useState([]);
@@ -20,6 +22,8 @@ export default function PrivateRoutes({ setSignedIn, signedIn }) {
         showReviews={showReviews}
         signedIn={signedIn}
       />
+      <AllReviews path="/allreviews" signedIn={signedIn} />
+      <MyReviews path="/myreviews" signedIn={signedIn} />
     </Router>
   );
 }
