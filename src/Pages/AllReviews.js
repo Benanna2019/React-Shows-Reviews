@@ -1,17 +1,21 @@
-import React from "react";
-import axios from "axios";
+import React from 'react';
+import axios from 'axios';
 
-import Review from "../components/Review";
+import Review from '../components/Review';
 
 export default function AllReviews({ signedIn }) {
   const [allReviews, setAllReviews] = React.useState([]);
   React.useEffect(() => {
     (async function () {
       try {
-        axios.get("http://localhost:4000/all-reviews").then((resp) => {
-          console.log(resp.data[0]);
-          setAllReviews(resp.data[0]);
-        });
+        axios
+          .get(
+            'https://7v0n195sii.execute-api.us-east-1.amazonaws.com/dev/all-reviews',
+          )
+          .then((resp) => {
+            console.log(resp.data[0]);
+            setAllReviews(resp.data[0]);
+          });
       } catch (error) {
         console.log(error);
       }
@@ -29,8 +33,8 @@ export default function AllReviews({ signedIn }) {
 
 const style = {
   reviews: {
-    display: "flex",
-    justifyContent: "space-evenly",
-    flexWrap: "wrap",
+    display: 'flex',
+    justifyContent: 'space-evenly',
+    flexWrap: 'wrap',
   },
 };

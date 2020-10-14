@@ -1,9 +1,9 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Popover from "@material-ui/core/Popover";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import axios from "axios";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Popover from '@material-ui/core/Popover';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   typography: {
@@ -13,9 +13,9 @@ const useStyles = makeStyles((theme) => ({
 
 const style = {
   content: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
   },
 };
 
@@ -32,12 +32,15 @@ export default function ReviewPopover({ show, signedIn }) {
       const userReview = review;
       const userRating = rating;
 
-      const response = await axios.post("http://localhost:4000/create-review", {
-        token,
-        showId,
-        review: userReview,
-        rating: userRating,
-      });
+      const response = await axios.post(
+        'https://7v0n195sii.execute-api.us-east-1.amazonaws.com/dev/create-review',
+        {
+          token,
+          showId,
+          review: userReview,
+          rating: userRating,
+        },
+      );
       setAnchorEl(null);
       console.log(response);
     } catch (error) {
@@ -54,7 +57,7 @@ export default function ReviewPopover({ show, signedIn }) {
   };
 
   const open = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
+  const id = open ? 'simple-popover' : undefined;
 
   return (
     <div>
@@ -72,12 +75,12 @@ export default function ReviewPopover({ show, signedIn }) {
         anchorEl={anchorEl}
         onClose={handleClose}
         anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "center",
+          vertical: 'bottom',
+          horizontal: 'center',
         }}
         transformOrigin={{
-          vertical: "top",
-          horizontal: "center",
+          vertical: 'top',
+          horizontal: 'center',
         }}
       >
         <div style={style.content}>

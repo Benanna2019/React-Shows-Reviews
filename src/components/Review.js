@@ -1,7 +1,7 @@
-import React from "react";
-import axios from "axios";
-import Button from "@material-ui/core/Button";
-import Paper from "@material-ui/core/Paper";
+import React from 'react';
+import axios from 'axios';
+import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
 
 export default function Review({ review, signedIn }) {
   const [following, setFollowing] = React.useState([]);
@@ -13,10 +13,10 @@ export default function Review({ review, signedIn }) {
       try {
         const token = signedIn.signInUserSession.idToken.jwtToken;
         const response = await axios.post(
-          "http://localhost:4000/all-followed-users",
+          'https://7v0n195sii.execute-api.us-east-1.amazonaws.com/dev/all-followed-users',
           {
             token,
-          }
+          },
         );
         setFollowing(response.data);
       } catch (error) {
@@ -28,10 +28,13 @@ export default function Review({ review, signedIn }) {
   async function follow(reviewedBy) {
     try {
       const token = signedIn.signInUserSession.idToken.jwtToken;
-      const response = await axios.post("http://localhost:4000/follow-user", {
-        token,
-        userFollowed: reviewedBy,
-      });
+      const response = await axios.post(
+        'https://7v0n195sii.execute-api.us-east-1.amazonaws.com/dev/follow-user',
+        {
+          token,
+          userFollowed: reviewedBy,
+        },
+      );
       setIsFollowed(true);
       setFetchToggle(!fetchToggle);
     } catch (error) {
@@ -47,10 +50,13 @@ export default function Review({ review, signedIn }) {
   async function unfollow(reviewedBy) {
     try {
       const token = signedIn.signInUserSession.idToken.jwtToken;
-      const response = await axios.post("http://localhost:4000/unfollow-user", {
-        token,
-        userFollowed: reviewedBy,
-      });
+      const response = await axios.post(
+        'https://7v0n195sii.execute-api.us-east-1.amazonaws.com/dev/unfollow-user',
+        {
+          token,
+          userFollowed: reviewedBy,
+        },
+      );
       setIsFollowed(false);
       setFetchToggle(!fetchToggle);
       console.log(response);
@@ -79,13 +85,13 @@ export default function Review({ review, signedIn }) {
         }
         color={
           isFollowed || checkIsFollowed(review.reviewedBy)
-            ? "secondary"
-            : "primary"
+            ? 'secondary'
+            : 'primary'
         }
       >
         {isFollowed || checkIsFollowed(review.reviewedBy)
-          ? "Unfollow"
-          : "Follow"}
+          ? 'Unfollow'
+          : 'Follow'}
       </Button>
     </Paper>
   );
@@ -93,8 +99,8 @@ export default function Review({ review, signedIn }) {
 
 const style = {
   reviewCont: {
-    textAlign: "center",
-    width: "35vw",
-    margin: "20px",
+    textAlign: 'center',
+    width: '35vw',
+    margin: '20px',
   },
 };
