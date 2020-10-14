@@ -36,7 +36,7 @@ export default function Show({ show, signedIn, setShowReviews }) {
   }
 
   return (
-    <Card className={classes.root} onClick={() => getShowReviews()}>
+    <Card className={classes.root}>
       <CardActionArea>
         <CardMedia
           component="img"
@@ -57,6 +57,7 @@ export default function Show({ show, signedIn, setShowReviews }) {
       <CardActions>
         <ReviewPopover show={show} signedIn={signedIn} />
         <ShowPopover show={show} />
+        <Button onClick={() => getShowReviews()}>Get Show Reviews</Button>
       </CardActions>
     </Card>
   );

@@ -2,6 +2,7 @@ import React from "react";
 import Popcorn from "../assets/icons8-popcorn-96.png";
 import { Auth } from "aws-amplify";
 import { navigate, Link } from "@reach/router";
+import axios from "axios";
 
 export default function Navbar({ setSignedIn }) {
   return (
@@ -17,10 +18,25 @@ export default function Navbar({ setSignedIn }) {
         </Link>
       </div>
       <div>
-        <button>reviews</button>
+        <button
+          onClick={() => {
+            navigate("/allreviews");
+          }}
+        >
+          reviews
+        </button>
       </div>
       <div>
-        <button>maybe another</button>
+        <button
+          onClick={() => {
+            navigate("/myreviews");
+          }}
+        >
+          my reviews
+        </button>
+      </div>
+      <div>
+        <button>following</button>
       </div>
       <div>
         <button
