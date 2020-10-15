@@ -1,6 +1,6 @@
-import React from "react";
-import axios from "axios";
-import Review from "../components/Review";
+import React from 'react';
+import axios from 'axios';
+import Review from '../components/Review';
 
 export default function MyReviews({ signedIn }) {
   const [myReviews, setMyReviews] = React.useState([]);
@@ -9,9 +9,12 @@ export default function MyReviews({ signedIn }) {
       try {
         const token = signedIn.signInUserSession.idToken.jwtToken;
         axios
-          .post("http://localhost:4000/reviews-by-user", {
-            token,
-          })
+          .post(
+            'https://7v0n195sii.execute-api.us-east-1.amazonaws.com/dev/reviews-by-user',
+            {
+              token,
+            },
+          )
           .then((resp) => {
             setMyReviews(resp.data[0]);
             console.log(myReviews);
